@@ -129,3 +129,115 @@ export const requestSms = async (data) => {
 		})
 	})
 }
+//注册
+export const register = async (data) => {
+	return new Promise((resolve, reject) => {
+		uni.request({
+			url: url + "/api/register",
+			method:"POST",
+			data,
+			success: res => {
+				resolve(res)
+			},
+			fail: err => {
+				reject(err)
+			}
+		})
+	})
+}
+//登录
+export const login = async (data) => {
+	return new Promise((resolve, reject) => {
+		uni.request({
+			url: url + "/api/login",
+			method:"POST",
+			data,
+			success: res => {
+				resolve(res)
+			},
+			fail: err => {
+				reject(err)
+			}
+		})
+	})
+}
+//添加购物车
+export const cartadd = async (data,header) => {
+	return new Promise((resolve, reject) => {
+		uni.request({
+			url: url + "/api/cartadd",
+			data,
+			header,
+			success: res => {
+				resolve(res)
+			},
+			fail: err => {
+				reject(err)
+			}
+		})
+	})
+}
+//购物车列表
+export const cartlist = async (data,header) => {
+	return new Promise((resolve, reject) => {
+		uni.request({
+			url: url + "/api/cartlist",
+			data,
+			header,
+			success: res => {
+				resolve(res)
+			},
+			fail: err => {
+				reject(err)
+			}
+		})
+	})
+}
+//购物车修改
+export const cartedit = async (data,header) => {
+	return new Promise((resolve, reject) => {
+		uni.request({
+			url: url + "/api/cartedit",
+			data,
+			header,
+			success: res => {
+				resolve(res)
+			},
+			fail: err => {
+				reject(err)
+			}
+		})
+	})
+}
+//购物车删除
+export const cartdelete = async (data,header) => {
+	return new Promise((resolve, reject) => {
+		uni.request({
+			url: url + "/api/cartdelete",
+			data,
+			header,
+			success: res => {
+				resolve(res)
+			},
+			fail: err => {
+				reject(err)
+			}
+		})
+	})
+}
+//订单增加
+export const orderadd = async (data,header) => {
+	return new Promise((resolve, reject) => {
+		uni.request({
+			url: url + "/api/orderadd",
+			data,
+			header,
+			success: res => {
+				resolve(res)
+			},
+			fail: err => {
+				reject(err)
+			}
+		})
+	})
+}

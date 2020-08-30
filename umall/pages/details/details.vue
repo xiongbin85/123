@@ -24,9 +24,9 @@
 			<view class="changeNum">
 				<view class="num">购买数量</view>
 				<view class="action">
-					<label class="jian">-</label>
-					<label class="zhi">1</label>
-					<label class="jia">+</label>
+					<label class="jian" @click="sub">-</label>
+					<label class="zhi">{{num}}</label>
+					<label class="jia" @click="add">+</label>
 				</view>
 			</view>
 			<!-- 商品属性 -->
@@ -65,7 +65,7 @@
 		</view>
 		<!-- 底部按钮 -->
 		<view class="foot">
-			<button class="footbtn1">加入购物车</button>
+			<button class="footbtn1" @click="addCart">加入购物车</button>
 			<button class="footbtn2">立即购买</button>
 		</view>
 	</view>
@@ -73,16 +73,56 @@
 <script>
 	import {
 		requestGoodsInfo,
-		url
+		url,
+		cartadd
 	} from "../../utils/request.js"
 	export default {
 		data() {
 			return {
-				detail: {}
+				detail: {},
+				num: 1
 			}
 		},
 		methods: {
-
+			//减少数量
+			sub() {
+				if (this.num <= 1) {
+					return
+				} else {
+					this.num--
+				}
+			},
+			//增加数量
+			add() {
+				this.num++
+			},
+			//加入购物车
+			async addCart() {
+				//从本地缓存中获取个人信息
+				let userInfo = uni.getStorageSync("userInfo")
+				// console.log(userInfo)
+				//用户id
+				let uid = userInfo.uid
+				//请求头
+				let authorization = userInfo.token
+				//商品数量
+				let num = this.num
+				//商品id
+				let goodsid = this.detail.id
+				let res = await cartadd({uid,goodsid,num},{authorization})
+				// console.log(res)
+				if (res.data.code == 200) {
+					uni.showToast({
+						title: res.data.msg,
+						icon: "none"
+					})
+				} else {
+					uni.showToast({
+						title: res.data.msg,
+						icon: "none"
+					})
+				}
+			}
 		},
 		async onLoad(e) {
 			let id = e.id
@@ -90,9 +130,10 @@
 				id
 			})
 			this.detail = res.data.list[0]
+			//处理商品详情的图片和属性
 			this.detail.img = url + this.detail.img
 			this.detail.specsattr = this.detail.specsattr.split(",")
-			console.log(this.detail)
+			// console.log(this.detail)
 		}
 	}
 </script>

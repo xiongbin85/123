@@ -1,6 +1,6 @@
 <template>
 	<view>
-		<uni-search-bar :radius="100" bgColor="#ffffff" class="input_"></uni-search-bar>
+		<uni-search-bar :radius="100" bgColor="#ffffff" class="input_" @confirm="search" v-model="value"></uni-search-bar>
 		<view class="list" v-if="goods.length>0">
 			<view class="row" v-for="item in goods" :key="item.id">
 				<image :src="item.img" mode="aspectFit"></image>
@@ -22,7 +22,8 @@
 <script>
 	import uniSearchBar from '../../components/uni-search-bar/uni-search-bar.vue'
 	import {
-		requestSearch,url
+		requestSearch,
+		url
 	} from "../../utils/request.js"
 	export default {
 		components: {
@@ -30,25 +31,40 @@
 		},
 		data() {
 			return {
-				goods:[]
+				goods: [],
+				value: ""
 			}
 		},
-		async onLoad(e) {
+		onLoad(e) {
 			let keywords = e.keywords
-			let res = await requestSearch({
-				keywords
-			})
-			this.goods = res.data.list
-			if(this.goods){
-				this.goods.forEach(item=>{
-					item.img = url + item.img
-				})
-			}else{
-				this.goods = []
-			}
+			this.getGoods(keywords)
 		},
 		methods: {
-
+			async getGoods(keywords) {
+				let res = await requestSearch({
+					keywords
+				})
+				this.goods = res.data.list
+				if (this.goods) {
+					this.goods.forEach(item => {
+						item.img = url + item.img
+					})
+				} else {
+					this.goods = []
+				}
+			},
+			//搜索
+			search(e) {
+				if (e.value == "") {
+					uni.showToast({
+						title: "请不要输入空值",
+						icon: "none"
+					})
+					return
+				} else {
+					this.getGoods(e.value)
+				}
+			}
 		}
 	}
 </script>

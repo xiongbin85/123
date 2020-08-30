@@ -134,7 +134,19 @@
 </template>
 
 <script>
-	
+	export default{
+		data(){
+			return{
+				allPrice:0
+			}
+		},
+		methods:{
+			
+		},
+		mounted() {
+			
+		}
+	}
 </script>
 <style>
 	@import url("../../common/css/confirm.css");
