@@ -26,12 +26,68 @@
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 /* 导入外部的样式文件 */
 /* @import url("../../common/css/index.css"); */
-.box{
+.box.data-v-9d78abf4 {
 	position: relative;
 }
-.row{
+.row.data-v-9d78abf4 {
 	display: -webkit-box;
 	display: -webkit-flex;
 	display: flex;
@@ -43,7 +99,7 @@
 	        justify-content: space-around;
 	margin: 40rpx;
 }
-.send{
+.send.data-v-9d78abf4 {
 	display: -webkit-box;
 	display: -webkit-flex;
 	display: flex;
@@ -51,16 +107,15 @@
 	-webkit-justify-content: space-between;
 	        justify-content: space-between;
 }
-.send text:nth-of-type(2){
+.send text.data-v-9d78abf4:nth-of-type(2) {
 	color: #00BB00;
 }
-text{
+text.data-v-9d78abf4 {
 	font-size: 27rpx;
 	margin-bottom: 10rpx;
 }
-input{
+input.data-v-9d78abf4 {
 	border-bottom: 1rpx solid gray;
 	height: 65rpx;
 }
-
 

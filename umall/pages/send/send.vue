@@ -7,7 +7,8 @@
 		<view class="row">
 			<view class="send">
 				<text>验证码</text>
-				<text @click="getCode">获取验证码</text>
+				<text @click="getCode" v-if="getCode!=''">获取验证码</text>
+				<text v-else>{{time}}</text>
 			</view>
 			<input type="text" v-model="code" placeholder="- - - -" maxlength="4" />
 		</view>
@@ -26,28 +27,54 @@
 
 <script>
 	import {
-		requestSms
+		requestSms,
+		wxlogin
 	} from "../../utils/request.js"
 	export default {
 		data() {
 			return {
 				phone: "",
 				code: "",
-				getcode:""
+				getcode: "",
+				time: 60
 			}
 		},
 		methods: {
 			async getCode() {
-				let res = await requestSms()
+				let phone = this.phone
+				//获取手机验证码
+				let res = await requestSms({
+					phone
+				})
 				this.getcode = res.data.list.code
-				// console.log(code)
+				// console.log(this.getcode)
+				// let t = setInterval(() => {
+				// 	this.time--
+				// 	if (this.time == 0) {
+				// 		clearInterval(t)
+				// 	}
+				// }, 1000)
 			},
-			submit() {
-				if (this.phone == "") {
-					uni.showToast({
-						title: "请输入电话号码",
-						icon: "none"
+			async submit() {
+				let code = this.code
+				let phone = this.phone
+				if (code == this.getcode) {
+					let res = await wxlogin({
+						phone
 					})
+					// console.log(res)
+					if (res.data.code == 200) {
+						uni.setStorageSync("userInfo", res.data.list)
+						uni.switchTab({
+							url: "../index/index"
+						})
+					}else{
+						uni.showToast({
+							title:res.data.msg,
+							icon:"none"
+						})
+					}
+
 				}
 			}
 		}

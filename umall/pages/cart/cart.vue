@@ -1,6 +1,9 @@
 <template>
 	<view class="container">
-		<view class="top">
+		<view class="none" v-if="cartList.length==0">
+			购物车空空如也
+		</view>
+		<view class="top" v-else>
 			<scroll-view class="scroll-view_H" scroll-x="true" scroll-left="0" v-for="(item,index) in cartList" :key="item.id">
 				<view class="cartInfo" id="demo1">
 					<!-- 购物车商品信息 -->
@@ -26,7 +29,7 @@
 							<view class="cartInfo_num_child">
 								<label for="" @click="sub(item.id,index)">-</label>
 								<label for="">{{item.num}}</label>
-								<label for="" @click="add(item.id)">+</label>
+								<label for="" @click="add(item.id,index)">+</label>
 							</view>
 						</view>
 					</view>
@@ -61,8 +64,7 @@
 		cartlist,
 		url,
 		cartedit,
-		cartdelete,
-		orderadd
+		cartdelete
 	} from "../../utils/request.js"
 	export default {
 		data() {
@@ -77,60 +79,26 @@
 			//前往确认订单页面
 			async toConfirm() {
 				// console.log(this.cartList)
-				//从本地缓存中获取个人信息
-				let userInfo = uni.getStorageSync("userInfo")
-				let uid = userInfo.uid
-				//请求头
-				let authorization = userInfo.token
-				//用户名
-				let username = userInfo.nickname
-				//用户手机号
-				let userphone = userInfo.phone
-				//用户地址
-				let address = "翻斗大街翻斗花园二号楼1001室"
-				//总金额
-				let countmoney = this.allPrice
-				//总数量
-				let countnumber = this.allNum
-				//添加时间
-				let addtime = new Date().getTime()
-				let idArr = []
-				let goodsIdArr = []
-				this.cartList.forEach(item => {
-					if (item.checked) {
-						idArr.push(item.id)
-						goodsIdArr.push(item.goodsid)
-					}
-				})
-				//商品id
-				let goodsid = goodsIdArr.join(",")
-				//购物车id
-				let idstr = idArr.join(",")
-				//添加订单
-				if (idstr == "") {
+				//有一个被选中就跳转确认订单页
+				let choose = this.cartList.some(item => item.checked)
+				if (!choose) {
 					uni.showToast({
 						title: "请选择商品",
 						icon: "none"
 					})
 					return
 				}
-				let res = await orderadd({
-					uid,
-					goodsid,
-					username,
-					userphone,
-					address,
-					countmoney,
-					countnumber,
-					addtime,
-					idstr
-				}, {
-					authorization
+				//把选中的商品存入本地缓存中
+				let arr = []
+				this.cartList.forEach(item => {
+					if (item.checked) {
+						arr.push(item)
+					}
 				})
-				console.log(res)
-				// uni.navigateTo({
-				// 	url:"../confirm/confirm"
-				// })
+				uni.setStorageSync("orderList", arr)
+				uni.navigateTo({
+					url: "../confirm/confirm"
+				})
 			},
 			//删除
 			del(id) {
@@ -172,38 +140,62 @@
 						icon: "none"
 					})
 				} else {
+					//页面选中的商品数量减少
+					this.cartList[index].num--
+					//数据库商品数量减少
 					cartedit({
 						id,
 						type
 					}, {
 						authorization
 					})
-					this.getCartList()
+					//更改总价和总数
+					if (goods.checked) {
+						this.allPrice -= goods.price
+						this.allNum -= 1
+					}
 				}
+
 
 			},
 			//增加数量
-			add(id) {
+			add(id, index) {
 				//从本地缓存中获取个人信息
 				let userInfo = uni.getStorageSync("userInfo")
 				//请求头
 				let authorization = userInfo.token
 				let type = 2
+				//页面商品数量增加
+				this.cartList[index].num++
+				//数据库商品数量增加
 				cartedit({
 					id,
 					type
 				}, {
 					authorization
 				})
-				this.getCartList()
+				let goods = this.cartList[index]
+				//更改总价和总数
+				if (goods.checked) {
+					this.allPrice += goods.price
+					this.allNum += 1
+				}
 			},
 			//全选，取消全选
 			selectAll(e) {
 				// console.log(e)
-				this.allPrice = e.detail.value
+				this.allSelect = e.detail.value
 				if (this.cartList.length > 0) {
 					this.cartList.forEach(item => {
-						item.checked = this.allPrice
+						item.checked = this.allSelect
+						//选中的时候总价增加，总数量增加，取消选中的时候总价减少取消的总价，总数量减少
+						if (this.allSelect) {
+							this.allPrice += item.price * item.num
+							this.allNum += item.num
+						} else {
+							this.allPrice -= item.price * item.num
+							this.allNum -= item.num
+						}
 					})
 				}
 			},
@@ -265,5 +257,11 @@
 	.cartInfo_image_img {
 		width: 120rpx;
 		height: 120rpx;
+	}
+
+	.none {
+		text-align: center;
+		margin: 40rpx auto;
+		color: #ccc;
 	}
 </style>

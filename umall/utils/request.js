@@ -129,28 +129,11 @@ export const requestSms = async (data) => {
 		})
 	})
 }
-//注册
-export const register = async (data) => {
-	return new Promise((resolve, reject) => {
-		uni.request({
-			url: url + "/api/register",
-			method:"POST",
-			data,
-			success: res => {
-				resolve(res)
-			},
-			fail: err => {
-				reject(err)
-			}
-		})
-	})
-}
 //登录
-export const login = async (data) => {
+export const wxlogin = async (data) => {
 	return new Promise((resolve, reject) => {
 		uni.request({
-			url: url + "/api/login",
-			method:"POST",
+			url: url + "/api/wxlogin",
 			data,
 			success: res => {
 				resolve(res)
@@ -162,7 +145,7 @@ export const login = async (data) => {
 	})
 }
 //添加购物车
-export const cartadd = async (data,header) => {
+export const cartadd = async (data, header) => {
 	return new Promise((resolve, reject) => {
 		uni.request({
 			url: url + "/api/cartadd",
@@ -178,7 +161,7 @@ export const cartadd = async (data,header) => {
 	})
 }
 //购物车列表
-export const cartlist = async (data,header) => {
+export const cartlist = async (data, header) => {
 	return new Promise((resolve, reject) => {
 		uni.request({
 			url: url + "/api/cartlist",
@@ -194,7 +177,7 @@ export const cartlist = async (data,header) => {
 	})
 }
 //购物车修改
-export const cartedit = async (data,header) => {
+export const cartedit = async (data, header) => {
 	return new Promise((resolve, reject) => {
 		uni.request({
 			url: url + "/api/cartedit",
@@ -210,7 +193,7 @@ export const cartedit = async (data,header) => {
 	})
 }
 //购物车删除
-export const cartdelete = async (data,header) => {
+export const cartdelete = async (data, header) => {
 	return new Promise((resolve, reject) => {
 		uni.request({
 			url: url + "/api/cartdelete",
@@ -226,11 +209,46 @@ export const cartdelete = async (data,header) => {
 	})
 }
 //订单增加
-export const orderadd = async (data,header) => {
+export const orderadd = async (data, header) => {
 	return new Promise((resolve, reject) => {
+		// console.log(data)
 		uni.request({
 			url: url + "/api/orderadd",
+			data: {
+				params: JSON.stringify(data.params),
+				idstr: data.idstr
+			},
+			header,
+			success: res => {
+				resolve(res)
+			},
+			fail: err => {
+				reject(err)
+			}
+		})
+	})
+}
+//获取订单信息
+export const getorders = async (data, header) => {
+	return new Promise((resolve, reject) => {
+		uni.request({
+			url: url + "/api/orders",
 			data,
+			header,
+			success: res => {
+				resolve(res)
+			},
+			fail: err => {
+				reject(err)
+			}
+		})
+	})
+}
+//检测token是否过期
+export const checkToken = async (header) => {
+	return new Promise((resolve, reject) => {
+		uni.request({
+			url: url + "/api/checktoken",
 			header,
 			success: res => {
 				resolve(res)

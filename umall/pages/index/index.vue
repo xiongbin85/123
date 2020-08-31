@@ -220,7 +220,7 @@
 				if (this.value == "") {
 					uni.showToast({
 						title: "请不要输入空值",
-						icon:"none"
+						icon: "none"
 					})
 					return
 				}
@@ -237,9 +237,10 @@
 		},
 		async mounted() {
 			// console.log(url)
+			uni.showLoading()
 			//获取一级分类的数据
 			let cate = await requestCate()
-			console.log(cate)
+			// console.log(cate)
 			this.cateList = cate.data.list
 			//获取轮播图数据
 			let banner = await requestBanner()
@@ -253,13 +254,23 @@
 				this.bannerList = []
 			}
 			//获取秒杀活动的数据
-			setInterval(async () => {
-				let seckill = await requestSeckill()
-				let endtime = seckill.data.list[0].endtime
-				this.countTime(endtime)
+			let seckill = await requestSeckill()
+			this.t = setInterval(async () => {
+				if (seckill!=null) {
+					let endtime = seckill.data.list[0].endtime
+					this.countTime(endtime)
+				}else{
+					let endtime = 0
+					this.countTime(endtime)
+				}
+
 			}, 1000)
 			//获取商品信息
 			this.getOneTypeGoods(this.tag)
+			uni.hideLoading()
+		},
+		beforeDestroy() {
+			clearInterval(this.t)
 		}
 	}
 </script>

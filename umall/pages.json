@@ -80,18 +80,6 @@
 				"navigationBarTitleText": "订单页"
 			}
 		}
-	    ,{
-            "path" : "pages/login/login",
-            "style" : {
-				"navigationBarTitleText": "登录"
-			}
-        }
-        ,{
-            "path" : "pages/register/register",
-            "style" : {
-				"navigationBarTitleText": "注册"
-			}
-        }
     ],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",

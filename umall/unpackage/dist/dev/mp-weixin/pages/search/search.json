@@ -1,4 +1,6 @@
 {
   "navigationBarTitleText": "搜索列表",
-  "usingComponents": {}
+  "usingComponents": {
+    "uni-search-bar": "/components/uni-search-bar/uni-search-bar"
+  }
 }

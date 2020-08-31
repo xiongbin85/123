@@ -1,9 +1,9 @@
 (global["webpackJsonp"] = global["webpackJsonp"] || []).push([["pages/confirm/confirm"],{
 
 /***/ 31:
-/*!****************************************************************************!*\
-  !*** D:/前端学习/第五阶段/小U/小U源码-静态/main.js?{"page":"pages%2Fconfirm%2Fconfirm"} ***!
-  \****************************************************************************/
+/*!**************************************************************************!*\
+  !*** D:/前端学习/第五阶段/小U/umall/main.js?{"page":"pages%2Fconfirm%2Fconfirm"} ***!
+  \**************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -17,9 +17,9 @@ createPage(_confirm.default);
 /***/ }),
 
 /***/ 32:
-/*!*********************************************************!*\
-  !*** D:/前端学习/第五阶段/小U/小U源码-静态/pages/confirm/confirm.vue ***!
-  \*********************************************************/
+/*!*******************************************************!*\
+  !*** D:/前端学习/第五阶段/小U/umall/pages/confirm/confirm.vue ***!
+  \*******************************************************/
 /*! no static exports found */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -58,9 +58,9 @@ component.options.__file = "pages/confirm/confirm.vue"
 /***/ }),
 
 /***/ 33:
-/*!****************************************************************************************!*\
-  !*** D:/前端学习/第五阶段/小U/小U源码-静态/pages/confirm/confirm.vue?vue&type=template&id=ee625af0& ***!
-  \****************************************************************************************/
+/*!**************************************************************************************!*\
+  !*** D:/前端学习/第五阶段/小U/umall/pages/confirm/confirm.vue?vue&type=template&id=ee625af0& ***!
+  \**************************************************************************************/
 /*! exports provided: render, staticRenderFns, recyclableRender, components */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -80,9 +80,9 @@ __webpack_require__.r(__webpack_exports__);
 /***/ }),
 
 /***/ 34:
-/*!****************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/@dcloudio/vue-cli-plugin-uni/packages/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/webpack-preprocess-loader??ref--16-0!./node_modules/@dcloudio/webpack-uni-mp-loader/lib/template.js!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/webpack-uni-app-loader/page-meta.js!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/vue-loader/lib??vue-loader-options!./node_modules/@dcloudio/webpack-uni-mp-loader/lib/style.js!D:/前端学习/第五阶段/小U/小U源码-静态/pages/confirm/confirm.vue?vue&type=template&id=ee625af0& ***!
-  \****************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/*!**************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/@dcloudio/vue-cli-plugin-uni/packages/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/webpack-preprocess-loader??ref--16-0!./node_modules/@dcloudio/webpack-uni-mp-loader/lib/template.js!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/webpack-uni-app-loader/page-meta.js!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/vue-loader/lib??vue-loader-options!./node_modules/@dcloudio/webpack-uni-mp-loader/lib/style.js!D:/前端学习/第五阶段/小U/umall/pages/confirm/confirm.vue?vue&type=template&id=ee625af0& ***!
+  \**************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
 /*! exports provided: render, staticRenderFns, recyclableRender, components */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -107,9 +107,9 @@ render._withStripped = true
 /***/ }),
 
 /***/ 35:
-/*!**********************************************************************************!*\
-  !*** D:/前端学习/第五阶段/小U/小U源码-静态/pages/confirm/confirm.vue?vue&type=script&lang=js& ***!
-  \**********************************************************************************/
+/*!********************************************************************************!*\
+  !*** D:/前端学习/第五阶段/小U/umall/pages/confirm/confirm.vue?vue&type=script&lang=js& ***!
+  \********************************************************************************/
 /*! no static exports found */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -123,154 +123,220 @@ __webpack_require__.r(__webpack_exports__);
 /***/ }),
 
 /***/ 36:
-/*!*****************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/webpack-preprocess-loader??ref--12-1!./node_modules/@dcloudio/webpack-uni-mp-loader/lib/script.js!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/vue-loader/lib??vue-loader-options!./node_modules/@dcloudio/webpack-uni-mp-loader/lib/style.js!D:/前端学习/第五阶段/小U/小U源码-静态/pages/confirm/confirm.vue?vue&type=script&lang=js& ***!
-  \*****************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/*!***************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/webpack-preprocess-loader??ref--12-1!./node_modules/@dcloudio/webpack-uni-mp-loader/lib/script.js!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/vue-loader/lib??vue-loader-options!./node_modules/@dcloudio/webpack-uni-mp-loader/lib/style.js!D:/前端学习/第五阶段/小U/umall/pages/confirm/confirm.vue?vue&type=script&lang=js& ***!
+  \***************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
 /*! no static exports found */
-/***/ (function(module, exports) {
+/***/ (function(module, exports, __webpack_require__) {
 
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
+"use strict";
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _regenerator = _interopRequireDefault(__webpack_require__(/*! ./node_modules/@vue/babel-preset-app/node_modules/@babel/runtime/regenerator */ 17));
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+var _request = __webpack_require__(/*! ../../utils/request.js */ 20);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {try {var info = gen[key](arg);var value = info.value;} catch (error) {reject(error);return;}if (info.done) {resolve(value);} else {Promise.resolve(value).then(_next, _throw);}}function _asyncToGenerator(fn) {return function () {var self = this,args = arguments;return new Promise(function (resolve, reject) {var gen = fn.apply(self, args);function _next(value) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value);}function _throw(err) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err);}_next(undefined);});};}var _default =
+
+
+{
+  data: function data() {
+    return {
+      allPrice: 0,
+      allNum: 0,
+      orderList: [] };
+
+  },
+  methods: {
+    //减少
+    sub: function sub(index) {
+      if (this.orderList[index].num <= 1) {
+        uni.showToast({
+          title: "数量不能再少了！！！",
+          icon: "none" });
+
+        return;
+      }
+      this.orderList[index].num--;
+      this.allNum -= 1;
+      this.allPrice -= this.orderList[index].price * this.orderList[index].num;
+    },
+    //增加
+    add: function add(index) {
+      this.orderList[index].num++;
+      this.allNum += 1;
+      this.allPrice += this.orderList[index].price * this.orderList[index].num;
+    },
+    pay: function pay() {var _this = this;return _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee() {var userInfo, uid, authorization, username, userphone, address, countmoney, countnumber, addtime, idArr, goodsIdArr, goodsid, idstr, params, res;return _regenerator.default.wrap(function _callee$(_context) {while (1) {switch (_context.prev = _context.next) {case 0:
+                userInfo = uni.getStorageSync("userInfo");
+                uid = userInfo.uid;
+                //请求头
+                authorization = userInfo.token;
+                //用户名
+                username = "胡图图";
+                //用户手机号
+                userphone = userInfo.phone;
+                //用户地址
+                address = "翻斗大街翻斗花园二号楼1001室";
+                //总金额
+                countmoney = _this.allPrice;
+                //总数量
+                countnumber = _this.allNum;
+                //添加时间
+                addtime = new Date().getTime();
+                idArr = [];
+                goodsIdArr = [];
+                _this.orderList.forEach(function (item) {
+                  idArr.push(item.id);
+                  goodsIdArr.push(item.goodsid);
+                });
+                //商品id
+                goodsid = goodsIdArr.join(",");
+                //购物车id
+                idstr = idArr.join(",");
+                params = {
+                  uid: uid,
+                  username: username,
+                  userphone: userphone,
+                  address: address,
+                  countmoney: countmoney,
+                  countnumber: countnumber,
+                  addtime: addtime };
+
+                // console.log(params)
+                //添加订单
+                _context.next = 17;return (0, _request.orderadd)({
+                  params: params,
+                  idstr: idstr },
+                {
+                  authorization: authorization });case 17:res = _context.sent;
+
+                // console.log(res)
+                //跳转订单页面
+                uni.reLaunch({
+                  url: "/pages/order/order" });case 19:case "end":return _context.stop();}}}, _callee);}))();
+
+
+    } },
+
+  mounted: function mounted() {var _this2 = this;
+    this.orderList = uni.getStorageSync("orderList");
+    // console.log(this.orderList)
+    if (this.orderList) {
+      this.orderList.forEach(function (item) {
+        item.img = item.img;
+        _this2.allPrice += item.price * item.num;
+        _this2.allNum += item.num;
+      });
+    }
+  } };exports.default = _default;
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
 /***/ }),
 
 /***/ 37:
-/*!******************************************************************************************!*\
-  !*** D:/前端学习/第五阶段/小U/小U源码-静态/pages/confirm/confirm.vue?vue&type=style&index=0&lang=css& ***!
-  \******************************************************************************************/
+/*!****************************************************************************************!*\
+  !*** D:/前端学习/第五阶段/小U/umall/pages/confirm/confirm.vue?vue&type=style&index=0&lang=css& ***!
+  \****************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -284,9 +350,9 @@ __webpack_require__.r(__webpack_exports__);
 /***/ }),
 
 /***/ 38:
-/*!**********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/mini-css-extract-plugin/dist/loader.js??ref--6-oneOf-1-0!./node_modules/css-loader/dist/cjs.js??ref--6-oneOf-1-1!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/webpack-preprocess-loader??ref--6-oneOf-1-2!./node_modules/postcss-loader/src??ref--6-oneOf-1-3!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/vue-loader/lib??vue-loader-options!./node_modules/@dcloudio/webpack-uni-mp-loader/lib/style.js!D:/前端学习/第五阶段/小U/小U源码-静态/pages/confirm/confirm.vue?vue&type=style&index=0&lang=css& ***!
-  \**********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/*!********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/mini-css-extract-plugin/dist/loader.js??ref--6-oneOf-1-0!./node_modules/css-loader/dist/cjs.js??ref--6-oneOf-1-1!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/webpack-preprocess-loader??ref--6-oneOf-1-2!./node_modules/postcss-loader/src??ref--6-oneOf-1-3!./node_modules/@dcloudio/vue-cli-plugin-uni/packages/vue-loader/lib??vue-loader-options!./node_modules/@dcloudio/webpack-uni-mp-loader/lib/style.js!D:/前端学习/第五阶段/小U/umall/pages/confirm/confirm.vue?vue&type=style&index=0&lang=css& ***!
+  \********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
