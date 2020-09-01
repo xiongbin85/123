@@ -130,4 +130,9 @@ page{
 	-webkit-align-items: center;
 	        align-items: center;
 }
+.login{
+	text-align: center;
+	margin-top: 200rpx;
+	font-size: 60rpx;
+}
 

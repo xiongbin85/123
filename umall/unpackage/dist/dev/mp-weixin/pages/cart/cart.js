@@ -192,7 +192,15 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
+
+
+
+
+
+
 var _request = __webpack_require__(/*! ../../utils/request.js */ 20);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {try {var info = gen[key](arg);var value = info.value;} catch (error) {reject(error);return;}if (info.done) {resolve(value);} else {Promise.resolve(value).then(_next, _throw);}}function _asyncToGenerator(fn) {return function () {var self = this,args = arguments;return new Promise(function (resolve, reject) {var gen = fn.apply(self, args);function _next(value) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value);}function _throw(err) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err);}_next(undefined);});};}var _default =
+
 
 
 
@@ -204,32 +212,34 @@ var _request = __webpack_require__(/*! ../../utils/request.js */ 20);function _i
       cartList: [],
       allSelect: false,
       allPrice: 0,
-      allNum: 0 };
+      allNum: 0,
+      isLogin: false };
 
   },
   methods: {
+    //前往登录页
+    toLogin: function toLogin() {
+      uni.reLaunch({
+        url: "../send/send" });
+
+    },
     //前往确认订单页面
-    toConfirm: function toConfirm() {var _this = this;return _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee() {var choose, arr;return _regenerator.default.wrap(function _callee$(_context) {while (1) {switch (_context.prev = _context.next) {case 0:
-                // console.log(this.cartList)
+    toConfirm: function toConfirm() {var _this = this;return _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee() {var arr;return _regenerator.default.wrap(function _callee$(_context) {while (1) {switch (_context.prev = _context.next) {case 0:
                 //有一个被选中就跳转确认订单页
-                choose = _this.cartList.some(function (item) {return item.checked;});if (
-                choose) {_context.next = 4;break;}
+                arr = _this.cartList.filter(function (item) {return item.checked;});if (!(
+                arr.length == 0)) {_context.next = 6;break;}
                 uni.showToast({
                   title: "请选择商品",
-                  icon: "none" });return _context.abrupt("return");case 4:
+                  icon: "none" });return _context.abrupt("return");case 6:
 
 
 
-                //把选中的商品存入本地缓存中
-                arr = [];
-                _this.cartList.forEach(function (item) {
-                  if (item.checked) {
-                    arr.push(item);
-                  }
-                });
+                //把选中的商品存入本地缓存
                 uni.setStorageSync("orderList", arr);
                 uni.navigateTo({
                   url: "../confirm/confirm" });case 8:case "end":return _context.stop();}}}, _callee);}))();
+
+
 
     },
     //删除
@@ -372,12 +382,35 @@ var _request = __webpack_require__(/*! ../../utils/request.js */ 20);function _i
                 } else {
                   _this4.cartList = [];
                 }case 8:case "end":return _context2.stop();}}}, _callee2);}))();
+    },
+    test: function test() {var _this5 = this;return _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee3() {var userInfo, authorization, res;return _regenerator.default.wrap(function _callee3$(_context3) {while (1) {switch (_context3.prev = _context3.next) {case 0:
+                //判断是否登录
+                userInfo = uni.getStorageSync("userInfo");
+                authorization = userInfo.token;
+                _this5.userInfo = userInfo;
+                //已登录
+                if (!_this5.userInfo.token) {_context3.next = 13;break;}
+                _this5.isLogin = true;
+                //判断token是否过期
+                _context3.next = 7;return (0, _request.checkToken)({ authorization: authorization });case 7:res = _context3.sent;if (!(
+
+                res.data !== "")) {_context3.next = 11;break;}
+                _this5.isLogin = false;return _context3.abrupt("return");case 11:_context3.next = 15;break;case 13:
+
+
+
+
+                _this5.isLogin = false;return _context3.abrupt("return");case 15:case "end":return _context3.stop();}}}, _callee3);}))();
+
+
     } },
 
-  mounted: function mounted() {
-    this.getCartList();
+  mounted: function mounted() {var _this6 = this;return _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee4() {return _regenerator.default.wrap(function _callee4$(_context4) {while (1) {switch (_context4.prev = _context4.next) {case 0:
+              _this6.test();
+              _this6.getCartList();case 2:case "end":return _context4.stop();}}}, _callee4);}))();
   },
   onShow: function onShow() {
+    this.test();
     this.getCartList();
   } };exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))

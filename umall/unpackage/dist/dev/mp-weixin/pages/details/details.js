@@ -208,11 +208,13 @@ var _request = __webpack_require__(/*! ../../utils/request.js */ 20);function _i
 
 
 
+
 {
   data: function data() {
     return {
       detail: {},
-      num: 1 };
+      num: 1,
+      isLogin: false };
 
   },
   methods: {
@@ -229,19 +231,39 @@ var _request = __webpack_require__(/*! ../../utils/request.js */ 20);function _i
       this.num++;
     },
     //加入购物车
-    addCart: function addCart() {var _this = this;return _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee() {var userInfo, uid, authorization, num, goodsid, res;return _regenerator.default.wrap(function _callee$(_context) {while (1) {switch (_context.prev = _context.next) {case 0:
-                //从本地缓存中获取个人信息
+    addCart: function addCart() {var _this = this;return _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee() {var userInfo, authorization, result, uid, num, goodsid, res;return _regenerator.default.wrap(function _callee$(_context) {while (1) {switch (_context.prev = _context.next) {case 0:
+                //判断是否登录
                 userInfo = uni.getStorageSync("userInfo");
-                // console.log(userInfo)
+                _this.userInfo = userInfo;
+                // console.log(this.userInfo)
+                //已登陆
+                if (!_this.userInfo.token) {_context.next = 21;break;}
+                _this.isLogin = true;
+                //请求头
+                authorization = userInfo.token;_context.next = 7;return (
+                  (0, _request.checkToken)({ authorization: authorization }));case 7:result = _context.sent;if (!(
+
+                result.data !== "")) {_context.next = 12;break;}
+                _this.isLogin = false;
+                uni.showToast({
+                  title: "请先登录",
+                  icon: "none" });return _context.abrupt("return");case 12:
+
+
+
                 //用户id
                 uid = userInfo.uid;
-                //请求头
-                authorization = userInfo.token;
                 //商品数量
                 num = _this.num;
                 //商品id
-                goodsid = _this.detail.id;_context.next = 7;return (
-                  (0, _request.cartadd)({ uid: uid, goodsid: goodsid, num: num }, { authorization: authorization }));case 7:res = _context.sent;
+                goodsid = _this.detail.id;_context.next = 17;return (
+                  (0, _request.cartadd)({
+                    uid: uid,
+                    goodsid: goodsid,
+                    num: num },
+                  {
+                    authorization: authorization }));case 17:res = _context.sent;
+
                 // console.log(res)
                 if (res.data.code == 200) {
                   uni.showToast({
@@ -253,13 +275,25 @@ var _request = __webpack_require__(/*! ../../utils/request.js */ 20);function _i
                     title: res.data.msg,
                     icon: "none" });
 
-                }case 9:case "end":return _context.stop();}}}, _callee);}))();
+                }
+                //未登录
+                _context.next = 24;break;case 21:
+                _this.isLogin = false;
+                uni.showToast({
+                  title: "请先登录",
+                  icon: "none" });return _context.abrupt("return");case 24:case "end":return _context.stop();}}}, _callee);}))();
+
+
+
+
     } },
 
   onLoad: function onLoad(e) {var _this2 = this;return _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee2() {var id, res;return _regenerator.default.wrap(function _callee2$(_context2) {while (1) {switch (_context2.prev = _context2.next) {case 0:
-              id = e.id;_context2.next = 3;return (
-                (0, _request.requestGoodsInfo)({
-                  id: id }));case 3:res = _context2.sent;
+              // 获取传递过来的id
+              id = e.id;
+              //请求商品详情数据
+              _context2.next = 3;return (0, _request.requestGoodsInfo)({
+                id: id });case 3:res = _context2.sent;
 
               _this2.detail = res.data.list[0];
               //处理商品详情的图片和属性

@@ -169,14 +169,30 @@ var _request = __webpack_require__(/*! ../../utils/request.js */ 20);function _i
 {
   data: function data() {
     return {
-      goodsList: [] };
+      goodsList: [],
+      value: "" };
 
   },
   methods: {
+    //前往商品详情页
     toDetail: function toDetail(id) {
       uni.navigateTo({
         url: "/pages/details/details?id=" + id });
 
+    },
+    //搜索
+    enter: function enter() {
+      if (this.value == "") {
+        uni.showToast({
+          title: "请不要输入空值",
+          icon: "none" });
+
+        return;
+      }
+      uni.navigateTo({
+        url: "/pages/search/search?keywords=" + this.value });
+
+      this.value = "";
     } },
 
   onLoad: function onLoad(e) {var _this = this;return _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee() {var fid, res;return _regenerator.default.wrap(function _callee$(_context) {while (1) {switch (_context.prev = _context.next) {case 0:

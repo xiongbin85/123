@@ -5,7 +5,7 @@
 			<view class="row" v-for="item in goods" :key="item.id">
 				<image :src="item.img" mode="aspectFit"></image>
 				<view class="info">
-					<text>{{item.goodsname}}</text>
+					<text class="goodsname">{{item.goodsname}}</text>
 					<text>原价￥{{item.market_price}}</text>
 					<text>现价￥{{item.price}}</text>
 					<text>3565评论</text>
@@ -41,9 +41,11 @@
 		},
 		methods: {
 			async getGoods(keywords) {
+				//根据关键词搜索数据
 				let res = await requestSearch({
 					keywords
 				})
+				//渲染页面
 				this.goods = res.data.list
 				if (this.goods) {
 					this.goods.forEach(item => {
@@ -111,5 +113,11 @@
 		text-align: center;
 		font-size: 40rpx;
 		color: #006699;
+	}
+	.goodsname{
+		width: 350rpx;
+		overflow: hidden;
+		white-space: nowrap;
+		text-overflow: ellipsis;
 	}
 </style>

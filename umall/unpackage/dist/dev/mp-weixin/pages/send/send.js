@@ -163,36 +163,63 @@ var _request = __webpack_require__(/*! ../../utils/request.js */ 20);function _i
 
 
 {
+
   data: function data() {
     return {
       phone: "",
       code: "",
       getcode: "",
-      time: 60 };
+      time: 60,
+      show: true,
+      canSubmit: true };
 
   },
   methods: {
-    getCode: function getCode() {var _this = this;return _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee() {var phone, res;return _regenerator.default.wrap(function _callee$(_context) {while (1) {switch (_context.prev = _context.next) {case 0:
+    getCode: function getCode() {var _this = this;return _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee() {var reg, phone, res, t;return _regenerator.default.wrap(function _callee$(_context) {while (1) {switch (_context.prev = _context.next) {case 0:
+                reg = /^1[3456789]\d{9}$/;
                 phone = _this.phone;
-                //获取手机验证码
-                _context.next = 3;return (0, _request.requestSms)({
-                  phone: phone });case 3:res = _context.sent;
+                //判断输入的格式是否为正确手机格式
+                if (reg.test(phone)) {_context.next = 5;break;}
+                uni.showToast({
+                  title: "请输入正确的手机号",
+                  icon: "none" });return _context.abrupt("return");case 5:_context.next = 7;return (
+
+
+
+
+                  (0, _request.requestSms)({
+                    phone: phone }));case 7:res = _context.sent;
 
                 _this.getcode = res.data.list.code;
-                // console.log(this.getcode)
-                // let t = setInterval(() => {
-                // 	this.time--
-                // 	if (this.time == 0) {
-                // 		clearInterval(t)
-                // 	}
-                // }, 1000)
-              case 5:case "end":return _context.stop();}}}, _callee);}))();},
+                _this.show = false;
+                console.log(_this.getcode);
+                //倒计时
+                t = setInterval(function () {
+                  _this.time--;
+                  _this.canSubmit = false;
+                  if (_this.time == 0) {
+                    clearInterval(t);
+                    _this.time = 60;
+                    _this.show = true;
+                    _this.canSubmit = true;
+                  }
+                }, 1000);case 12:case "end":return _context.stop();}}}, _callee);}))();
+    },
     submit: function submit() {var _this2 = this;return _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee2() {var code, phone, res;return _regenerator.default.wrap(function _callee2$(_context2) {while (1) {switch (_context2.prev = _context2.next) {case 0:
                 code = _this2.code;
-                phone = _this2.phone;if (!(
-                code == _this2.getcode)) {_context2.next = 7;break;}_context2.next = 5;return (
+                phone = _this2.phone;
+                //判断是否过期
+                if (!(_this2.time <= 0)) {_context2.next = 5;break;}
+                uni.showToast({
+                  title: "验证码过期请重新获取验证码",
+                  icon: "none" });return _context2.abrupt("return");case 5:if (!(
+
+
+
+
+                code == _this2.getcode)) {_context2.next = 10;break;}_context2.next = 8;return (
                   (0, _request.wxlogin)({
-                    phone: phone }));case 5:res = _context2.sent;
+                    phone: phone }));case 8:res = _context2.sent;
 
                 // console.log(res)
                 if (res.data.code == 200) {
@@ -205,7 +232,7 @@ var _request = __webpack_require__(/*! ../../utils/request.js */ 20);function _i
                     title: res.data.msg,
                     icon: "none" });
 
-                }case 7:case "end":return _context2.stop();}}}, _callee2);}))();
+                }case 10:case "end":return _context2.stop();}}}, _callee2);}))();
 
 
     } } };exports.default = _default;

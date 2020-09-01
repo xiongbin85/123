@@ -196,4 +196,12 @@ page{
 	color:#fff;
 	border-radius:0rpx!important;
 }
+.name {
+	width: 650rpx;
+	height: 140rpx;
+	display: -webkit-box;
+	-webkit-box-orient: vertical;
+	-webkit-line-clamp: 3;
+	overflow: hidden;
+}
 

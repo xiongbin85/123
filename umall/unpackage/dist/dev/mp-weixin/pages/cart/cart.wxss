@@ -147,4 +147,14 @@
 	margin: 40rpx auto;
 	color: #ccc;
 }
+.goodsname.data-v-0f00adf4 {
+	width: 350rpx;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+.login.data-v-0f00adf4 {
+	text-align: center;
+	margin-top: 200rpx;
+	font-size: 60rpx;
+}
 

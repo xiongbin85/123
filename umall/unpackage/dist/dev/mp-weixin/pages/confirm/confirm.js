@@ -256,17 +256,28 @@ var _request = __webpack_require__(/*! ../../utils/request.js */ 20);function _i
 
         return;
       }
+      //页面数量改变
       this.orderList[index].num--;
+      //总数改变
       this.allNum -= 1;
-      this.allPrice -= this.orderList[index].price * this.orderList[index].num;
+      //总价改变
+      this.allPrice -= this.orderList[index].price;
+      //把改变的数据存入缓存中
+      uni.setStorageSync("orderList", this.orderList);
     },
     //增加
     add: function add(index) {
+      //页面数量改变
       this.orderList[index].num++;
+      //总数改变
       this.allNum += 1;
-      this.allPrice += this.orderList[index].price * this.orderList[index].num;
+      //总价改变
+      this.allPrice += this.orderList[index].price;
+      //把改变的数据存入缓存中
+      uni.setStorageSync("orderList", this.orderList);
     },
     pay: function pay() {var _this = this;return _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee() {var userInfo, uid, authorization, username, userphone, address, countmoney, countnumber, addtime, idArr, goodsIdArr, goodsid, idstr, params, res;return _regenerator.default.wrap(function _callee$(_context) {while (1) {switch (_context.prev = _context.next) {case 0:
+                //获取用户信息
                 userInfo = uni.getStorageSync("userInfo");
                 uid = userInfo.uid;
                 //请求头
@@ -310,15 +321,20 @@ var _request = __webpack_require__(/*! ../../utils/request.js */ 20);function _i
                 {
                   authorization: authorization });case 17:res = _context.sent;
 
+                uni.showToast({
+                  title: "添加成功",
+                  icon: "none" });
+
                 // console.log(res)
                 //跳转订单页面
-                uni.reLaunch({
-                  url: "/pages/order/order" });case 19:case "end":return _context.stop();}}}, _callee);}))();
+                uni.navigateTo({
+                  url: "/pages/order/order" });case 20:case "end":return _context.stop();}}}, _callee);}))();
 
 
     } },
 
   mounted: function mounted() {var _this2 = this;
+    //初始化页面
     this.orderList = uni.getStorageSync("orderList");
     // console.log(this.orderList)
     if (this.orderList) {

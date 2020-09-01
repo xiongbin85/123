@@ -130,7 +130,7 @@ __webpack_require__.r(__webpack_exports__);
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _regenerator = _interopRequireDefault(__webpack_require__(/*! ./node_modules/@vue/babel-preset-app/node_modules/@babel/runtime/regenerator */ 17));
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _regenerator = _interopRequireDefault(__webpack_require__(/*! ./node_modules/@vue/babel-preset-app/node_modules/@babel/runtime/regenerator */ 17));
 
 
 
@@ -180,8 +180,14 @@ var _request = __webpack_require__(/*! ../../utils/request.js */ 20);function _i
 
   },
   methods: {
+    toProduct: function toProduct(fid) {
+      uni.navigateTo({
+        url: "/pages/product/product?fid=" + fid });
+
+    },
     //点击切换样式
     tab: function tab(index) {
+      //点击哪条就获取哪条数据
       this.tag = index;
       this.getGoodsList();
     },
@@ -191,7 +197,9 @@ var _request = __webpack_require__(/*! ../../utils/request.js */ 20);function _i
                 //请求商品分类列表
                 _this.cateList = res.data.list;
                 // console.log(this.cateList)
+                //初始化页面数据
                 _this.goodsList = _this.cateList[_this.tag].children;
+                //处理图片
                 if (_this.goodsList) {
                   _this.goodsList.forEach(function (item) {
                     item.img = _request.url + item.img;
@@ -202,10 +210,10 @@ var _request = __webpack_require__(/*! ../../utils/request.js */ 20);function _i
     } },
 
   onLoad: function onLoad() {
-
     this.getGoodsList();
-    console.log(this.goodsList);
+    // console.log(this.goodsList)
   } };exports.default = _default;
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 
 /***/ }),
 

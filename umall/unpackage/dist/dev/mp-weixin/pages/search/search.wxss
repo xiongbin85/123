@@ -42,4 +42,10 @@ image {
 	font-size: 40rpx;
 	color: #006699;
 }
+.goodsname{
+	width: 350rpx;
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+}
 

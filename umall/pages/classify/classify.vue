@@ -14,7 +14,7 @@
 			<view class="right_list">
 				<!-- 商品 -->
 				<view class="bottom" v-if="goodsList.length>0">
-					<view class="bottom_list" v-for="item in goodsList" :key="item.id">
+					<view class="bottom_list" v-for="item in goodsList" :key="item.id" @click="toProduct(item.pid)">
 						<!-- 每个最多显示6个 -->
 						<view>
 							<image :src="item.img" alt="">
@@ -48,8 +48,14 @@
 			}
 		},
 		methods: {
+			toProduct(fid){
+				uni.navigateTo({
+					url: "/pages/product/product?fid=" + fid
+				})
+			},
 			//点击切换样式
 			tab(index) {
+				//点击哪条就获取哪条数据
 				this.tag = index
 				this.getGoodsList()
 			},
@@ -59,7 +65,9 @@
 				//请求商品分类列表
 				this.cateList = res.data.list
 				// console.log(this.cateList)
+				//初始化页面数据
 				this.goodsList = this.cateList[this.tag].children
+				//处理图片
 				if (this.goodsList) {
 					this.goodsList.forEach(item => {
 						item.img = url + item.img
@@ -70,9 +78,8 @@
 			}
 		},
 		onLoad() {
-
 			this.getGoodsList()
-			console.log(this.goodsList)
+			// console.log(this.goodsList)
 		}
 	}
 </script>

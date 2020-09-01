@@ -1,12 +1,12 @@
 ]<template>
 	<view>
-		<uni-search-bar radius="100" bgColor="#ffff"></uni-search-bar>
+		<uni-search-bar radius="100" bgColor="#ffff" @confirm="search" @keydown.enter="search" v-model="searchInfo"></uni-search-bar>
 		<view class="list" v-if="orderList.length>0">
 			<view class="row" v-for="item in orderList" :key="item.id">
 				<view class="products" >
 					<view class="imagebox" v-for="(i,index) in item.child" :key="index">
 						<image :src="i.img" mode="widthFix"></image>
-						<text>{{i.goodsname}}</text>
+						<text class="goodsname">{{i.goodsname}}</text>
 					</view>
 				</view>
 				<view class="info">
@@ -33,11 +33,25 @@
 		},
 		data() {
 			return {
-				orderList:[]
+				orderList:[],
+				searchInfo:""
 			}
 		},
 		methods: {
-
+			//搜索
+			search(e){
+				if (e.value == "") {
+					uni.showToast({
+						title: "请不要输入空值",
+						icon: "none"
+					})
+					return
+				}
+				uni.navigateTo({
+					url: "/pages/search/search?keywords=" + e.value
+				})
+				e.value = ""
+			}
 		},
 		async onLoad() {
 			let userInfo = uni.getStorageSync("userInfo")
@@ -111,5 +125,12 @@
 		text-align: center;
 		font-size: 40rpx;
 		color: #006699;
+	}
+	.goodsname{
+		display: inline-block;
+		width: 350rpx;
+		overflow: hidden;
+		white-space: nowrap;
+		text-overflow: ellipsis;
 	}
 </style>

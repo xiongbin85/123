@@ -7,7 +7,7 @@
 		<!-- 详情基本信息 -->
 		<view class="detailInfo">
 			<view class="detailInfoName">
-				<label>{{detail.goodsname}}</label>
+				<label class="name">{{detail.goodsname}}</label>
 			</view>
 			<view class="detailInfoPrice">
 				<label style="color: red;">￥ {{detail.price}}</label>
@@ -74,13 +74,15 @@
 	import {
 		requestGoodsInfo,
 		url,
-		cartadd
+		cartadd,
+		checkToken
 	} from "../../utils/request.js"
 	export default {
 		data() {
 			return {
 				detail: {},
-				num: 1
+				num: 1,
+				isLogin: false
 			}
 		},
 		methods: {
@@ -98,34 +100,66 @@
 			},
 			//加入购物车
 			async addCart() {
-				//从本地缓存中获取个人信息
+				//判断是否登录
 				let userInfo = uni.getStorageSync("userInfo")
-				// console.log(userInfo)
-				//用户id
-				let uid = userInfo.uid
-				//请求头
-				let authorization = userInfo.token
-				//商品数量
-				let num = this.num
-				//商品id
-				let goodsid = this.detail.id
-				let res = await cartadd({uid,goodsid,num},{authorization})
-				// console.log(res)
-				if (res.data.code == 200) {
-					uni.showToast({
-						title: res.data.msg,
-						icon: "none"
+				this.userInfo = userInfo
+				// console.log(this.userInfo)
+				//已登陆
+				if (this.userInfo.token) {
+					this.isLogin = true
+					//请求头
+					let authorization = userInfo.token
+					let result = await checkToken({authorization})
+					//判断token是否过期
+					if(result.data!==""){
+						this.isLogin = false
+						uni.showToast({
+							title: "请先登录",
+							icon: "none"
+						})
+						return
+					}
+					//用户id
+					let uid = userInfo.uid
+					//商品数量
+					let num = this.num
+					//商品id
+					let goodsid = this.detail.id
+					let res = await cartadd({
+						uid,
+						goodsid,
+						num
+					}, {
+						authorization
 					})
+					// console.log(res)
+					if (res.data.code == 200) {
+						uni.showToast({
+							title: res.data.msg,
+							icon: "none"
+						})
+					} else {
+						uni.showToast({
+							title: res.data.msg,
+							icon: "none"
+						})
+					}
+				//未登录
 				} else {
+					this.isLogin = false
 					uni.showToast({
-						title: res.data.msg,
+						title: "请先登录",
 						icon: "none"
 					})
+					return
 				}
+
 			}
 		},
 		async onLoad(e) {
+			// 获取传递过来的id
 			let id = e.id
+			//请求商品详情数据
 			let res = await requestGoodsInfo({
 				id
 			})
@@ -139,4 +173,13 @@
 </script>
 <style>
 	@import url("../../common/css/details.css");
+
+	.name {
+		width: 650rpx;
+		height: 140rpx;
+		display: -webkit-box;
+		-webkit-box-orient: vertical;
+		-webkit-line-clamp: 3;
+		overflow: hidden;
+	}
 </style>

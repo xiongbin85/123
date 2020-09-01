@@ -169,11 +169,25 @@ var _request = __webpack_require__(/*! ../../utils/request.js */ 20);function _i
 
   data: function data() {
     return {
-      orderList: [] };
+      orderList: [],
+      searchInfo: "" };
 
   },
-  methods: {},
+  methods: {
+    //搜索
+    search: function search(e) {
+      if (e.value == "") {
+        uni.showToast({
+          title: "请不要输入空值",
+          icon: "none" });
 
+        return;
+      }
+      uni.navigateTo({
+        url: "/pages/search/search?keywords=" + e.value });
+
+      e.value = "";
+    } },
 
   onLoad: function onLoad() {var _this = this;return _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee() {var userInfo, uid, authorization, res;return _regenerator.default.wrap(function _callee$(_context) {while (1) {switch (_context.prev = _context.next) {case 0:
               userInfo = uni.getStorageSync("userInfo");

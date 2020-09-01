@@ -7,7 +7,7 @@
 				<image class="logo" src="/static/index/logo.jpg" alt="" />
 			</view>
 			<view class="inputView">
-				<input class="textinput" v-model="value" style="center" type="text" placeholder="寻找商品" @keydown.enter="enter" />
+				<input class="textinput" v-model="value" style="center" type="text" placeholder="寻找商品" @keydown.enter="enter" @confirm="enter" />
 			</view>
 		</view>
 		<!-- 顶部导航  scroll-view -->
@@ -231,6 +231,7 @@
 			}
 		},
 		filters: {
+			//过滤器过滤时间
 			filterTime(time) {
 				return (time + "").padStart(2, "0")
 			}
@@ -256,14 +257,12 @@
 			//获取秒杀活动的数据
 			let seckill = await requestSeckill()
 			this.t = setInterval(async () => {
-				if (seckill!=null) {
+				if (seckill.data.list) {
 					let endtime = seckill.data.list[0].endtime
 					this.countTime(endtime)
-				}else{
-					let endtime = 0
-					this.countTime(endtime)
+				} else {
+					clearInterval(this.t)
 				}
-
 			}, 1000)
 			//获取商品信息
 			this.getOneTypeGoods(this.tag)

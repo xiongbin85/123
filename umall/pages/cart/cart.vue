@@ -1,62 +1,69 @@
 <template>
-	<view class="container">
-		<view class="none" v-if="cartList.length==0">
-			购物车空空如也
-		</view>
-		<view class="top" v-else>
-			<scroll-view class="scroll-view_H" scroll-x="true" scroll-left="0" v-for="(item,index) in cartList" :key="item.id">
-				<view class="cartInfo" id="demo1">
-					<!-- 购物车商品信息 -->
-					<view class="cartInfochild">
-						<!-- 选择框 -->
-						<view class="cartInfo_switch common">
-							<!-- 点击当前商品 -->
-							<switch type="checkbox" :checked="item.checked" @change="selectOne(index)" />
-						</view>
-						<!-- 图片 -->
-						<view class="cartInfo_image common">
-							<image :src="item.img" mode=""></image>
-						</view>
+	<view>
+		<view class="container" v-if="isLogin">
+			<view class="none" v-if="cartList.length==0">
+				购物车空空如也
+			</view>
+			<view class="top" v-else>
+				<scroll-view class="scroll-view_H" scroll-x="true" scroll-left="0" v-for="(item,index) in cartList" :key="item.id">
+					<view class="cartInfo" id="demo1">
+						<!-- 购物车商品信息 -->
+						<view class="cartInfochild">
+							<!-- 选择框 -->
+							<view class="cartInfo_switch common">
+								<!-- 点击当前商品 -->
+								<switch type="checkbox" :checked="item.checked" @change="selectOne(index)" />
+							</view>
+							<!-- 图片 -->
+							<view class="cartInfo_image common">
+								<image :src="item.img" mode=""></image>
+							</view>
 
-						<!-- 信息 -->
-						<view class="cartInfo_info">
-							<label for="" style="font-size: 26rpx;">{{item.goodsname}}</label>
-							<label for="" style="font-size: 24rpx; color: #ccc;">规格：黑色</label>
-							<label for="" style="color: red;">￥{{item.price}}</label>
-						</view>
-						<!-- 加减数量 -->
-						<view class="cartInfo_num">
-							<view class="cartInfo_num_child">
-								<label for="" @click="sub(item.id,index)">-</label>
-								<label for="">{{item.num}}</label>
-								<label for="" @click="add(item.id,index)">+</label>
+							<!-- 信息 -->
+							<view class="cartInfo_info">
+								<label for="" style="font-size: 26rpx;" class="goodsname">{{item.goodsname}}</label>
+								<label for="" style="font-size: 24rpx; color: #ccc;">规格：黑色</label>
+								<label for="" style="color: red;">￥{{item.price}}</label>
+							</view>
+							<!-- 加减数量 -->
+							<view class="cartInfo_num">
+								<view class="cartInfo_num_child">
+									<label for="" @click="sub(item.id,index)">-</label>
+									<label for="">{{item.num}}</label>
+									<label for="" @click="add(item.id,index)">+</label>
+								</view>
 							</view>
 						</view>
 					</view>
+					<view class="cartDel" id="demo2"><label for="" @click="del(item.id)">删除</label></view>
+				</scroll-view>
+			</view>
+			<!-- 底部 -->
+			<view class="foot">
+				<view class="footd1">
+					<switch type="checkbox" :checked="allSelect" @change="selectAll" />
+					<label>全选</label>
 				</view>
-				<view class="cartDel" id="demo2"><label for="" @click="del(item.id)">删除</label></view>
-			</scroll-view>
+				<view class="footd2">
+					<view class="footd2sp1">
+						总计：
+						<label style="color: red;">{{allPrice}}</label>
+					</view>
+					<label class="footd2sp2">不含运费，已优惠￥0.00</label>
+				</view>
+				<!-- 跳到提交订单，结算页面 -->
+				<view class="footd3">
+					<!-- 被选中的商品的个数 -->
+					<label @click="toConfirm">去结算({{allNum}}件)</label>
+				</view>
+			</view>
 		</view>
-		<!-- 底部 -->
-		<view class="foot">
-			<view class="footd1">
-				<switch type="checkbox" :checked="allSelect" @change="selectAll" />
-				<label>全选</label>
-			</view>
-			<view class="footd2">
-				<view class="footd2sp1">
-					总计：
-					<label style="color: red;">{{allPrice}}</label>
-				</view>
-				<label class="footd2sp2">不含运费，已优惠￥0.00</label>
-			</view>
-			<!-- 跳到提交订单，结算页面 -->
-			<view class="footd3">
-				<!-- 被选中的商品的个数 -->
-				<label @click="toConfirm">去结算({{allNum}}件)</label>
-			</view>
+
+		<view class="login" v-else @click="toLogin">
+			前往登录
 		</view>
 	</view>
+
 </template>
 
 <script>
@@ -64,7 +71,8 @@
 		cartlist,
 		url,
 		cartedit,
-		cartdelete
+		cartdelete,
+		checkToken
 	} from "../../utils/request.js"
 	export default {
 		data() {
@@ -72,33 +80,35 @@
 				cartList: [],
 				allSelect: false,
 				allPrice: 0,
-				allNum: 0
+				allNum: 0,
+				isLogin: false
 			}
 		},
 		methods: {
+			//前往登录页
+			toLogin(){
+				uni.reLaunch({
+					url:"../send/send"
+				})
+			},
 			//前往确认订单页面
 			async toConfirm() {
-				// console.log(this.cartList)
 				//有一个被选中就跳转确认订单页
-				let choose = this.cartList.some(item => item.checked)
-				if (!choose) {
+				let arr = this.cartList.filter(item => item.checked)
+				if (arr.length == 0) {
 					uni.showToast({
 						title: "请选择商品",
 						icon: "none"
 					})
 					return
+				} else {
+					//把选中的商品存入本地缓存
+					uni.setStorageSync("orderList", arr)
+					uni.navigateTo({
+						url: "../confirm/confirm"
+					})
 				}
-				//把选中的商品存入本地缓存中
-				let arr = []
-				this.cartList.forEach(item => {
-					if (item.checked) {
-						arr.push(item)
-					}
-				})
-				uni.setStorageSync("orderList", arr)
-				uni.navigateTo({
-					url: "../confirm/confirm"
-				})
+
 			},
 			//删除
 			del(id) {
@@ -240,12 +250,35 @@
 				} else {
 					this.cartList = []
 				}
+			},
+			async test(){
+				//判断是否登录
+				let userInfo = uni.getStorageSync("userInfo")
+				let authorization = userInfo.token
+				this.userInfo = userInfo
+				//已登录
+				if (this.userInfo.token) {
+					this.isLogin = true
+					//判断token是否过期
+					let res = await checkToken({authorization})
+					// console.log(res)
+					if(res.data!==""){
+						this.isLogin = false
+						return
+					}
+				//未登录
+				} else {
+					this.isLogin = false
+					return
+				}
 			}
 		},
-		mounted() {
+		async mounted() {
+			this.test()
 			this.getCartList()
 		},
 		onShow() {
+			this.test()
 			this.getCartList()
 		}
 	};
@@ -263,5 +296,17 @@
 		text-align: center;
 		margin: 40rpx auto;
 		color: #ccc;
+	}
+
+	.goodsname {
+		width: 350rpx;
+		overflow: hidden;
+		text-overflow: ellipsis;
+	}
+
+	.login {
+		text-align: center;
+		margin-top: 200rpx;
+		font-size: 60rpx;
 	}
 </style>

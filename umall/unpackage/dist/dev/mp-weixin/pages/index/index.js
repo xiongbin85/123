@@ -384,6 +384,7 @@ var _request = __webpack_require__(/*! ../../utils/request.js */ 20);function _i
     } },
 
   filters: {
+    //过滤器过滤时间
     filterTime: function filterTime(time) {
       return (time + "").padStart(2, "0");
     } },
@@ -408,15 +409,13 @@ var _request = __webpack_require__(/*! ../../utils/request.js */ 20);function _i
               }
               //获取秒杀活动的数据
               _context3.next = 12;return (0, _request.requestSeckill)();case 12:seckill = _context3.sent;
-              _this2.t = setInterval( /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee2() {var endtime, _endtime;return _regenerator.default.wrap(function _callee2$(_context2) {while (1) {switch (_context2.prev = _context2.next) {case 0:
-                        if (seckill != null) {
+              _this2.t = setInterval( /*#__PURE__*/_asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee2() {var endtime;return _regenerator.default.wrap(function _callee2$(_context2) {while (1) {switch (_context2.prev = _context2.next) {case 0:
+                        if (seckill.data.list) {
                           endtime = seckill.data.list[0].endtime;
                           _this2.countTime(endtime);
                         } else {
-                          _endtime = 0;
-                          _this2.countTime(_endtime);
+                          clearInterval(_this2.t);
                         }case 1:case "end":return _context2.stop();}}}, _callee2);})),
-
               1000);
               //获取商品信息
               _this2.getOneTypeGoods(_this2.tag);

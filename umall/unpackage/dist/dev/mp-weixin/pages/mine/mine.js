@@ -232,29 +232,61 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
+
+
 var _request = __webpack_require__(/*! ../../utils/request.js */ 20);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {try {var info = gen[key](arg);var value = info.value;} catch (error) {reject(error);return;}if (info.done) {resolve(value);} else {Promise.resolve(value).then(_next, _throw);}}function _asyncToGenerator(fn) {return function () {var self = this,args = arguments;return new Promise(function (resolve, reject) {var gen = fn.apply(self, args);function _next(value) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value);}function _throw(err) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err);}_next(undefined);});};}var _default =
 
 
 {
   data: function data() {
     return {
-      userInfo: {} };
+      userInfo: {},
+      isLogin: false };
 
   },
   methods: {
-    toLogin: function toLogin() {
+    //前往订单页
+    toOrders: function toOrders() {
       uni.navigateTo({
+        url: "../order/order" });
+
+    },
+    //前往登录页
+    toLogin: function toLogin() {
+      uni.reLaunch({
         url: "../send/send" });
+
+    },
+    test: function test() {var _this = this;return _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee() {var userInfo, authorization, res;return _regenerator.default.wrap(function _callee$(_context) {while (1) {switch (_context.prev = _context.next) {case 0:
+                //判断是否登录
+                userInfo = uni.getStorageSync("userInfo");
+                _this.userInfo = userInfo;
+                // console.log(this.userInfo)
+                //已登录
+                if (!_this.userInfo.token) {_context.next = 13;break;}
+                _this.isLogin = true;
+                //请求头
+                authorization = userInfo.token;
+                //判断token是否过期
+                _context.next = 7;return (0, _request.checkToken)({ authorization: authorization });case 7:res = _context.sent;if (!(
+
+                res.data !== "")) {_context.next = 11;break;}
+                _this.isLogin = false;return _context.abrupt("return");case 11:_context.next = 15;break;case 13:
+
+
+
+
+                _this.isLogin = false;return _context.abrupt("return");case 15:case "end":return _context.stop();}}}, _callee);}))();
+
 
     } },
 
-  mounted: function mounted() {var _this = this;return _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee() {var userInfo, authorization, res;return _regenerator.default.wrap(function _callee$(_context) {while (1) {switch (_context.prev = _context.next) {case 0:
-              userInfo = uni.getStorageSync("userInfo");
-              _this.userInfo = userInfo;
-              //请求头
-              authorization = userInfo.token;_context.next = 5;return (
-                (0, _request.checkToken)({ authorization: authorization }));case 5:res = _context.sent;
-              console.log(res);case 7:case "end":return _context.stop();}}}, _callee);}))();
+  mounted: function mounted() {var _this2 = this;return _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee2() {return _regenerator.default.wrap(function _callee2$(_context2) {while (1) {switch (_context2.prev = _context2.next) {case 0:
+              _this2.test();case 1:case "end":return _context2.stop();}}}, _callee2);}))();
+  },
+  onShow: function onShow() {
+    this.test();
   } };exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
 

@@ -20,7 +20,7 @@
 						<image :src="item.img" mode=""></image>
 					</view>
 					<view class="carts_name">
-						<view for="" style="font-size: 30rpx;">{{item.goodsname}}</view>
+						<view for="" style="font-size: 30rpx;" class="goodsname">{{item.goodsname}}</view>
 						<view for="" style="font-size: 26rpx; color: #C0C0C0;">规格:黑</view>
 					</view>
 					<view class="carts_price">
@@ -124,17 +124,28 @@
 					})
 					return
 				}
+				//页面数量改变
 				this.orderList[index].num--
+				//总数改变
 				this.allNum -= 1
-				this.allPrice -= this.orderList[index].price * this.orderList[index].num
+				//总价改变
+				this.allPrice -= this.orderList[index].price
+				//把改变的数据存入缓存中
+				uni.setStorageSync("orderList",this.orderList)
 			},
 			//增加
 			add(index) {
+				//页面数量改变
 				this.orderList[index].num++
+				//总数改变
 				this.allNum += 1
-				this.allPrice += this.orderList[index].price * this.orderList[index].num
+				//总价改变
+				this.allPrice += this.orderList[index].price 
+				//把改变的数据存入缓存中
+				uni.setStorageSync("orderList",this.orderList)
 			},
 			async pay() {
+				//获取用户信息
 				let userInfo = uni.getStorageSync("userInfo")
 				let uid = userInfo.uid
 				//请求头
@@ -178,15 +189,20 @@
 				}, {
 					authorization
 				})
+				uni.showToast({
+					title:"添加成功",
+					icon:"none"
+				})
 				// console.log(res)
 				//跳转订单页面
-				uni.reLaunch({
+				uni.navigateTo({
 					url: "/pages/order/order"
 				})
 
 			}
 		},
 		mounted() {
+			//初始化页面
 			this.orderList = uni.getStorageSync("orderList")
 			// console.log(this.orderList)
 			if (this.orderList) {
@@ -201,4 +217,10 @@
 </script>
 <style>
 	@import url("../../common/css/confirm.css");
+	.goodsname{
+		display: -webkit-box;
+		-webkit-box-orient: vertical;
+		-webkit-line-clamp: 2;
+		overflow: hidden;
+	}
 </style>

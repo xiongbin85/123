@@ -2,7 +2,7 @@
 	<view>
 		<view class="search">
 			<icon type="search" color="white" size="10"></icon>
-			<input type="text" value="" placeholder="搜索商品" placeholder-class="placeholder" />
+			<input type="text" value="" placeholder="搜索商品" placeholder-class="placeholder" v-model="value" @keydown.enter="enter" @confirm="enter"  />
 		</view>
 		<!-- 商品列表 -->
 		<view class="goodsList" v-if="goodsList.length>0">
@@ -37,14 +37,30 @@
 	export default {
 		data() {
 			return {
-				goodsList: []
+				goodsList: [],
+				value:""
 			}
 		},
 		methods: {
+			//前往商品详情页
 			toDetail(id) {
 				uni.navigateTo({
 					url: "/pages/details/details?id=" + id
 				})
+			},
+			//搜索
+			enter() {
+				if (this.value == "") {
+					uni.showToast({
+						title: "请不要输入空值",
+						icon: "none"
+					})
+					return
+				}
+				uni.navigateTo({
+					url: "/pages/search/search?keywords=" + this.value
+				})
+				this.value = ""
 			}
 		},
 		async onLoad(e) {
